@@ -17,6 +17,11 @@ As you might already know this program only supports CLI(command line interface)
 * Importing from some medium to db
 
 
+## Run
+Requirements:
+* python 3
+
+
 ## What's next
 
 
