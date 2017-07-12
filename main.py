@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import sys
 from Modules.data import DataFetch, DataAdd, DataExport
 running = True
