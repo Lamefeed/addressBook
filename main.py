@@ -22,7 +22,7 @@ class Main():
                   "1. add a person\n",
                   "2. view address-book\n",
                   "3. search\n",
-                  "4. export to txt"
+                  "4. export to txt\n",
                   "5. quit")
             choice = input("Enter the number of the action you want to do:\n\n")
 
