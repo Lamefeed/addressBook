@@ -1,5 +1,5 @@
 import sys
-from Modules.data import DataFetch, DataAdd
+from Modules.data import DataFetch, DataAdd, DataExport
 running = True
 
 
@@ -22,7 +22,8 @@ class Main():
                   "1. add a person\n",
                   "2. view address-book\n",
                   "3. search\n",
-                  "4. quit")
+                  "4. export to txt"
+                  "5. quit")
             choice = input("Enter the number of the action you want to do:\n\n")
 
             if choice == '1':
@@ -36,6 +37,9 @@ class Main():
                 df = DataFetch()
                 df.search_data(name)
             elif choice == '4':
+                de = DataExport()
+                de.export_to_txt()
+            elif choice == '5':
                 sys.exit()
 
     def update_data(self):
