@@ -22,7 +22,7 @@ class DataFetch():
         if json_str:
             return json.dumps([dict(ix) for ix in content])
 
-        return content
+        return(content)
 
 
 class DataAdd():
