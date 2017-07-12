@@ -16,7 +16,7 @@ class Main():
             "to store and search\n" +
             "All of your contact using their name.\n\n\n")
         df = DataFetch()
-        df.database_conn
+        df.database_conn()
         while running:
             print("What do you want to do?\n",
                   "1. add a person\n",
@@ -29,7 +29,7 @@ class Main():
                 self.update_data()
             elif choice == '2':
                 df = DataFetch()
-                print(df.print_content_all(json_str=True))
+                print(df.print_content_all())
             elif choice == '3':
                 print("Search by using the persons name:\n")
                 name = input()
