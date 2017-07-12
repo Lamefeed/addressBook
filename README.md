@@ -16,6 +16,10 @@ As you might already know this program only supports CLI(command line interface)
 * Exporting from db to a different medium(for backup)
 * Importing from some medium to db
 
+## Branches
+The branches are as following:
+*Master(Stable)
+*Beta(Development)
 
 ## Run
 Requirements:
