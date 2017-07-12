@@ -18,8 +18,8 @@ As you might already know this program only supports CLI(command line interface)
 
 ## Branches
 The branches are as following:
-*Master(Stable)
-*Beta(Development)
+* Master(Stable)
+* Beta(Development)
 
 ## Run
 Requirements:
