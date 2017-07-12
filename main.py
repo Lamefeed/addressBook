@@ -16,7 +16,7 @@ class Main():
             "to store and search\n" +
             "All of your contact using their name.\n\n\n")
         df = DataFetch()
-        df.database_conn
+        df.database_conn()
         while running:
             print("What do you want to do?\n",
                   "1. add a person\n",
