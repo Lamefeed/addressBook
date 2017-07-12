@@ -1,5 +1,5 @@
-import sys
-from Modules.data import DataFetch, DataAdd, DataExport
+import sys, getopt
+from Modules.data import DataFetch, DataAdd
 running = True
 
 
@@ -51,10 +51,88 @@ class Main():
         address = input()
         print("Enter a email:\n")
         email = input()
+        self.save_data(name, phoneNumber, address, email)
+
+
+    def save_data(self, name, phone_number, address, email):
         da = DataAdd()
-        da.save_data(name, phoneNumber, address, email)
+        da.save_data(name, phone_number, address, email)
+
+
+
+    def help_text(self):
+        return '''
+            -h -help for help
+            -add to add, need be followed by
+                -n and a name
+                -p and a phone number
+                -e and an email
+                -a and an address
+
+            -pa to print all
+
+        '''
+
+
+
+    def main(self, argv):
+        df = DataFetch()
+        df.database_conn()
+        willAdd = False
+        phone = ""
+        name = ""
+        address = ""
+        email = ""
+        will_print = False
+
+        try:
+            opts, args = getopt.getopt(argv, "h:n:p:a:e:dd:g:", ["help=", "phone=", "name=", "address=", "email=", "printall="])
+        except getopt.GetoptError:
+            print (self.help_text())
+            sys.exit(2)
+        for opt, arg in opts:
+            if opt == '-h':
+                print (self.help_text())
+                sys.exit()
+
+            elif opt in ("-dd"):
+                willAdd = True
+
+            elif opt in ("-p", "--phone"):
+                phone = arg
+
+            elif opt in ("-a", "--address"):
+                address = arg
+                print("test")
+
+            elif opt in ("-n", "--name"):
+                name = arg
+
+            elif opt in ("-e", "--email"):
+                email = arg
+
+            elif opt in ("-g", "--printall"):
+                will_print = True
+
+
+        if willAdd:
+            if will_print:
+                print(self.help_text())
+                sys.exit()
+            if name != "":
+                self.save_data(name, phone, address, email)
+                sys.exit()
+        elif will_print:
+            df = DataFetch()
+            print(df.print_content_all())
+            sys.exit()
+        else:
+            m.start()
+
+
 
 
 m = Main()
 while running:
-    m.start()
+    m.main(sys.argv[1:])
+    # m.start()
