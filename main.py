@@ -1,3 +1,15 @@
+#
+#  main.py
+#  Adressbook
+#
+# This file contains the main logic of the address book. 
+# It is the starting point for running etc. 
+#
+# Author Secretlamefeederino
+# edits: Xenchrarr
+#
+
+
 import sys, getopt
 from Modules.data import DataFetch, DataAdd
 running = True
