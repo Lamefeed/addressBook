@@ -10,9 +10,9 @@ As you might already know this program only supports CLI(command line interface)
 * Adding people
 * Printing everything
 * Searching for people in the book
+* Editing existing people
 
 ## Features to be added
-* Editing existing people
 * Exporting from db to a different medium(for backup)
 * Importing from some medium to db
 
