@@ -34,4 +34,39 @@ class DataAdd():
 
 
 class DataEdit():
+
+    def update_database_all(self,cname, name, phoneNumber, address, email):
+        c.execute('''UPDATE book SET
+                  name =?,
+                  phoneNumber =?,
+                  address =?,
+                  email =?
+                  WHERE name =?
+                  ''', (name, phoneNumber, address, email, cname))
+        conn.commit()
+
+    def update_database_name(self, cname, name):
+        c.execute('''UPDATE book SET
+                  name =?
+                  WHERE name =?''',(name, cname))
+        conn.commit()
+
+    def update_database_number(self, cname, phoneNumber):
+        c.execute('''UPDATE book SET
+                  phoneNumber =?
+                  WHERE name =?''',(phoneNumber, cname))
+        conn.commit()
+
+    def update_database_address(self, cname, address):
+        c.execute('''UPDATE book SET
+                  address =?
+                  WHERE name =?''',(address, cname))
+        conn.commit()
+
+    def update_database_email(self, cname, email):
+        c.execute('''UPDATE book SET
+                  email =?
+                  WHERE name =?''',(email, cname))
+
+class DataExport():
     pass
