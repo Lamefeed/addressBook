@@ -40,10 +40,11 @@ class Main():
             elif choice == '4':
                 self.edit_data()
             elif choice == '5':
-                de = DataExport()
-                de.export_to_txt()
+                self.export_data()
             elif choice == '6':
                 sys.exit()
+            else:
+                print("You need to pick a valid option")
 
     def update_data(self):
         print("Enter a name:\n")
@@ -56,6 +57,11 @@ class Main():
         email = input()
         da = DataAdd()
         da.save_data(name, phoneNumber, address, email)
+
+    def export_data(self):
+        de = DataExport()
+        de.export_txt()
+        print("Success!")
 
     def edit_data(self):
         print("What do you want to edit(Enter the number of the",

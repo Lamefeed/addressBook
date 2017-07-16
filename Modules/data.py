@@ -69,4 +69,10 @@ class DataEdit():
                   WHERE name =?''',(email, cname))
 
 class DataExport():
-    pass
+
+    def export_txt(self):
+        c.execute("SELECT * FROM book")
+        content = c.fetchall() + "",
+        for x in content:
+            with open('data.txt', 'a') as out:
+                out.write(x +'\n')
