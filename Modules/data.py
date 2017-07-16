@@ -12,8 +12,8 @@ class DataFetch():
         conn.commit()
 
     def search_data(self, name):
-        t = (name, )
-        c.execute('SELECT * FROM book WHERE name=?', t)
+        t = ('%' + name + '%', )
+        c.execute('SELECT * FROM book WHERE name LIKE ?', t)
         print(c.fetchone())
 
     def print_content_all(self, json_str=False):
