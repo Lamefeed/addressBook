@@ -1,5 +1,6 @@
 import sqlite3
 import json
+import csv
 conn = sqlite3.connect('addressBook.db')
 c = conn.cursor()
 
@@ -70,9 +71,9 @@ class DataEdit():
 
 class DataExport():
 
-    def export_txt(self):
+    def export_csv(self):
         c.execute("SELECT * FROM book")
-        content = c.fetchall() + "",
-        for x in content:
-            with open('data.txt', 'a') as out:
-                out.write(x +'\n')
+        content = c.fetchall()
+        with open('data.csv', 'a') as out:
+            writer = csv.writer(out, lineterminator='\n')
+            writer.writerows(content)

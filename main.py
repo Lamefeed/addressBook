@@ -23,7 +23,7 @@ class Main():
                   "2. view address-book\n",
                   "3. search\n",
                   "4. edit\n",
-                  "5. export to txt\n",
+                  "5. export to csv\n",
                   "6. quit")
             choice = input("Enter the number of the action you want to do:\n\n")
 
@@ -60,7 +60,7 @@ class Main():
 
     def export_data(self):
         de = DataExport()
-        de.export_txt()
+        de.export_csv()
         print("Success!")
 
     def edit_data(self):
