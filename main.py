@@ -34,7 +34,7 @@ class Main():
                   "1. add a person\n",
                   "2. view address-book\n",
                   "3. search\n",
-                  "4. export to txt\n",
+                  # "4. export to txt\n",
                   "5. quit")
             choice = input("Enter the number of the action you want to do:\n\n")
 
@@ -48,9 +48,9 @@ class Main():
                 name = input()
                 df = DataFetch()
                 df.search_data(name)
-            elif choice == '4':
-                de = DataExport()
-                de.export_to_txt()
+            # elif choice == '4':
+            #     de = DataExport()
+            #     de.export_to_txt()
             elif choice == '5':
                 sys.exit()
 
@@ -71,7 +71,7 @@ class Main():
         da.save_data(name, phone_number, address, email)
 
 
-
+# Help text to be printed if arguments are mismatching
     def help_text(self):
         return '''
             -h -help for help
@@ -83,10 +83,13 @@ class Main():
 
             -pa to print all
 
+            -s and an search phrase (name atm)
+
         '''
 
 
-
+# Main function. It loops through the arguments and see if they match
+# If they match - the data is saved, and some action is taken.
     def main(self, argv):
         df = DataFetch()
         df.database_conn()
@@ -96,12 +99,16 @@ class Main():
         address = ""
         email = ""
         will_print = False
+        will_search = False
+        search_phrase = ""
 
         try:
-            opts, args = getopt.getopt(argv, "h:n:p:a:e:dd:g:", ["help=", "phone=", "name=", "address=", "email=", "printall="])
+            opts, args = getopt.getopt(argv, "h:n:p:a:e:dd:g:s:", ["help=", "phone=", "name=", "address=", "email=", "printall=", "search="])
         except getopt.GetoptError:
             print (self.help_text())
             sys.exit(2)
+
+        # looping through the arguments to find a matching one
         for opt, arg in opts:
             if opt == '-h':
                 print (self.help_text())
@@ -126,19 +133,32 @@ class Main():
             elif opt in ("-g", "--printall"):
                 will_print = True
 
+            elif opt in ("-s", "--search"):
+                will_search = True
+                search_phrase = arg
 
-        if willAdd:
-            if will_print:
+        if not willAdd and not will_print and not will_search and len(opts) > 1: # if arguments are supplied, but without print or add, print help text
+            print(self.help_text())
+
+
+        if willAdd: # is true if the -dd argument was added
+            if will_print: # if both the -dd and -pa was supplied - add and print, not allowed
                 print(self.help_text())
                 sys.exit()
-            if name != "":
-                self.save_data(name, phone, address, email)
+            if name != "": # if the -dd was used, you need at least to supply a name.
+                self.save_data(name, phone, address, email) # all of this data was fetched from the arguments
                 sys.exit()
-        elif will_print:
+        elif will_print: # true if -pa was added.
             df = DataFetch()
             print(df.print_content_all())
             sys.exit()
-        else:
+
+        elif will_search:
+            df = DataFetch()
+            df.search_data(search_phrase)
+            sys.exit()
+
+        else: # no arguments - run the menu.
             m.start()
 
 
