@@ -13,8 +13,8 @@ class DataFetch():
         conn.commit()
 
     def search_data(self, name):
-        t = (name, )
-        c.execute('SELECT * FROM book WHERE name=?', t)
+        t = ('%'+name+'%', )
+        c.execute('SELECT * FROM book WHERE name LIKE ?', t)
         print(c.fetchone())
 
     def print_content_all(self, json_str=False):
@@ -36,7 +36,7 @@ class DataAdd():
 
 class DataEdit():
 
-    def update_database_all(self,cname, name, phoneNumber, address, email):
+    def update_database_all(self, cname, name, phoneNumber, address, email):
         c.execute('''UPDATE book SET
                   name =?,
                   phoneNumber =?,
@@ -49,25 +49,26 @@ class DataEdit():
     def update_database_name(self, cname, name):
         c.execute('''UPDATE book SET
                   name =?
-                  WHERE name =?''',(name, cname))
+                  WHERE name =?''', (name, cname))
         conn.commit()
 
     def update_database_number(self, cname, phoneNumber):
         c.execute('''UPDATE book SET
                   phoneNumber =?
-                  WHERE name =?''',(phoneNumber, cname))
+                  WHERE name =?''', (phoneNumber, cname))
         conn.commit()
 
     def update_database_address(self, cname, address):
         c.execute('''UPDATE book SET
                   address =?
-                  WHERE name =?''',(address, cname))
+                  WHERE name =?''', (address, cname))
         conn.commit()
 
     def update_database_email(self, cname, email):
         c.execute('''UPDATE book SET
                   email =?
-                  WHERE name =?''',(email, cname))
+                  WHERE name =?''', (email, cname))
+
 
 class DataExport():
 

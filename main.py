@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#  main.py
+#  Adressbook
+#
+# This file contains the main logic of the address book.
+# It is the starting point for running etc.
+#
+# Author Secretlamefeederino
+# edits: Xenchrarr
+#
 
+
+import getopt
 import sys
 from Modules.data import DataFetch, DataAdd, DataEdit, DataExport
 running = True
@@ -116,7 +128,99 @@ class Main():
         else:
             print("You need to enter an actual value")
 
+    # Help text to be printed if arguments are mismatching
+    def help_text(self):
+        return '''
+            -h -help for help
+            -add to add, need be followed by
+                -n and a name
+                -p and a phone number
+                -e and an email
+                -a and an address
+            -pa to print all
+            -s and an search phrase (name atm)
+        '''
+
+    # Main function. It loops through the arguments and see if they match
+    # If they match - the data is saved, and some action is taken.
+    def main(self, argv):
+        df = DataFetch()
+        df.database_conn()
+        willAdd = False
+        phone = ""
+        name = ""
+        address = ""
+        email = ""
+        will_print = False
+        will_search = False
+        search_phrase = ""
+
+        try:
+            opts, args = getopt.getopt(
+                argv, "h:n:p:a:e:dd:g:s:", [
+                    "help=", "phone=", "name=",
+                    "address=", "email=", "printall=", "search="])
+        except getopt.GetoptError:
+            print(self.help_text())
+            sys.exit(2)
+
+        # looping through the arguments to find a matching one
+        for opt, arg in opts:
+            if opt == '-h':
+                print(self.help_text())
+                sys.exit()
+
+            elif opt in ("-dd"):
+                willAdd = True
+
+            elif opt in ("-p", "--phone"):
+                phone = arg
+
+            elif opt in ("-a", "--address"):
+                address = arg
+                print("test")
+
+            elif opt in ("-n", "--name"):
+                name = arg
+
+            elif opt in ("-e", "--email"):
+                email = arg
+
+            elif opt in ("-g", "--printall"):
+                will_print = True
+
+            elif opt in ("-s", "--search"):
+                will_search = True
+                search_phrase = arg
+        # if arguments are supplied, but without print or add, print help text
+        if not willAdd and not will_print and not will_search and len(
+                opts) > 1:
+            print(self.help_text())
+        # is true if the -dd arguemnt was added
+        if willAdd:
+             # if both the -dd and -pa was supplied - add and print, not allowed
+            if will_print:
+                print(self.help_text())
+                sys.exit()
+            # if the -dd was used, you need at least to supply a name.
+            if name != "":
+                # all of this data was fetched from the arguments
+                self.save_data(name, phone, address, email)
+                sys.exit()
+        elif will_print:  # true if -pa was added.
+            df = DataFetch()
+            print(df.print_content_all())
+            sys.exit()
+
+        elif will_search:
+            df = DataFetch()
+            df.search_data(search_phrase)
+            sys.exit()
+
+        else:  # no arguments - run the menu.
+            m.start()
+
 
 m = Main()
 while running:
-    m.start()
+    m.main(sys.argv[1:])
