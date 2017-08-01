@@ -11,9 +11,9 @@ As you might already know this program only supports CLI(command line interface)
 * Printing everything
 * Searching for people in the book
 * Editing existing people
+* Exporting from db to a different medium(for backup)
 
 ## Features to be added
-* Exporting from db to a different medium(for backup)
 * Importing from some medium to db
 
 ## Branches
@@ -29,4 +29,4 @@ Requirements:
 ## What's next
 
 
-More will come as time passes, I will be spending most of my sparetime over the next year creating this program
+More will come as time passes, I will be spending some of my sparetime over the next year creating this program
