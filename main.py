@@ -80,7 +80,7 @@ class Main():
               "part you want to change)?\n")
         print(" 1. All\n",
               "2. Name\n",
-              "3. Phone numbern\n",
+              "3. Phone number\n",
               "4. Address\n",
               "5. Email\n")
         choice = input()
