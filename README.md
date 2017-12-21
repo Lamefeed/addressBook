@@ -23,7 +23,7 @@ The branches are as following:
 
 ## Run
 Requirements:
-* python 3
+* python 3.6
 
 
 ## What's next
