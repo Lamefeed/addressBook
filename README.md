@@ -25,8 +25,6 @@ The branches are as following:
 Requirements:
 * python 3.6
 
-
 ## What's next
+### Making a graphical user interface so that all the normies can use this addressbook. I will also update the CLI client so that it looks better than what it currently does. 
 
-
-More will come as time passes, I will be spending some of my sparetime over the next year creating this program
