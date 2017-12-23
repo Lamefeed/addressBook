@@ -26,5 +26,5 @@ Requirements:
 * python 3.6
 
 ## What's next
-### Making a graphical user interface so that all the normies can use this addressbook. I will also update the CLI client so that it looks better than what it currently does. 
+ Making a graphical user interface so that all the normies can use this addressbook. I will also update the CLI client so that it looks better than what it currently does. 
 
