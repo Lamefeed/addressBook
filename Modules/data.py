@@ -72,7 +72,7 @@ class DataEdit():
 
 
 class DataExport():
-
+    # This class will contain multiple functions for exporting data
     def export_csv(self):
 
         c.execute("SELECT * FROM book")
@@ -80,3 +80,8 @@ class DataExport():
         with open('data.csv', 'a') as out:
             writer = csv.writer(out, lineterminator='\n')
             writer.writerows(content)
+
+
+class DataImport():
+    def import_csv(self):
+        pass
