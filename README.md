@@ -39,9 +39,10 @@ def import_csv(self, file_name):
                   i['Address'],
                   i['Email']) for i in dr]
 
-        c.executemay("""INSERT INTO book (name, phoneNumber, address, email)
+        
+    c.executemay("""INSERT INTO book (name, phoneNumber, address, email)
                     VALUES (?, ?, ?, ?);""", to_db)
-        conn.commit()
+    conn.commit()
 '''
 ## Branches
 The branches are as following:
