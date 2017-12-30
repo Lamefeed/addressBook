@@ -12,10 +12,20 @@ As you might already know this program only supports CLI(command line interface)
 * Searching for people in the book
 * Editing existing people
 * Exporting from db to a different medium(for backup)
+* Importing from csv to db
 
-## Features to be added
-* Importing from some medium to db
 
+# Using the addressbook:
+
+
+## Exporting and importing files:
+
+Importing csv-file, to do this you have to use the folloring formatting:
+
+Name        |Number     |Address      |Email
+------------|-----------|-----------|----------
+Test        |404        |Testaddress|test@example.example
+                        
 ## Branches
 The branches are as following:
 * Master(Stable)
