@@ -20,12 +20,29 @@ As you might already know this program only supports CLI(command line interface)
 
 ## Exporting and importing files:
 
-Importing csv-file, to do this you have to use the folloring formatting:
+If you want to use the function to import contacts from anywhere, please use
+this formatting:
 
 Name        |Number     |Address      |Email
 ------------|-----------|-----------|----------
 Test        |404        |Testaddress|test@example.example
-                        
+                
+If you want to use another type of formatting change this section in
+Modules/data.py:
+
+'''python
+def import_csv(self, file_name):
+    with open(file_name, 'r+') as f:
+        dr = csv.DictReader(f)  # comma is the default delimiter
+        to_db = [(i['Name'],
+                  i['Number],
+                  i['Address'],
+                  i['Email']) for i in dr]
+
+        c.executemay("""INSERT INTO book (name, phoneNumber, address, email)
+                    VALUES (?, ?, ?, ?);""", to_db)
+        conn.commit()
+'''
 ## Branches
 The branches are as following:
 * Master(Stable)
