@@ -31,6 +31,7 @@ If you want to use another type of formatting change this section in
 Modules/data.py:
 
 '''python
+
 def import_csv(self, file_name):
     with open(file_name, 'r+') as f:
         dr = csv.DictReader(f)  # comma is the default delimiter
