@@ -36,10 +36,9 @@ def import_csv(self, file_name):
     with open(file_name, 'r+') as f:
         dr = csv.DictReader(f)  # comma is the default delimiter
         to_db = [(i['Name'],
-                  i['Number],
-                  i['Address'],
-                  i['Email']) for i in dr]
-
+                         i['Number],
+                         i['Address'],
+                         i['Email']) for i in dr]
         
     c.executemay("""INSERT INTO book (name, phoneNumber, address, email)
                     VALUES (?, ?, ?, ?);""", to_db)
