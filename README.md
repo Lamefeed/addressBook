@@ -30,7 +30,7 @@ Test        |404        |Testaddress|test@example.example
 If you want to use another type of formatting change this section in
 Modules/data.py:
 
-'''python
+```python
 
 def import_csv(self, file_name):
     with open(file_name, 'r+') as f:
@@ -44,7 +44,7 @@ def import_csv(self, file_name):
     c.executemay("""INSERT INTO book (name, phoneNumber, address, email)
                     VALUES (?, ?, ?, ?);""", to_db)
     conn.commit()
-'''
+```
 ## Branches
 The branches are as following:
 * Master(Stable)
