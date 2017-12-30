@@ -86,8 +86,8 @@ class DataImport():
     # This call will ontain multiple function for importing data for different,
     # file formats and into the SQLite3 database
     def import_csv(self, file_name):
-        with open(file_name, 'r+') as fin:
-            dr = csv.DictReader(fin)  # comma is default delimiter
+        with open(file_name, 'r+') as f:
+            dr = csv.DictReader(f)  # comma is default delimiter
             to_db = [(i['Name'],
                       i['Number'],
                       i['Address'],
