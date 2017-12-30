@@ -14,7 +14,7 @@
 
 import getopt
 import sys
-from Modules.data import DataFetch, DataAdd, DataEdit, DataExport
+from Modules.data import DataFetch, DataAdd, DataEdit, DataExport, DataImport
 running = True
 
 
@@ -35,9 +35,10 @@ class Main():
                   "2. view address-book\n",
                   "3. search\n",
                   "4. edit\n",
-                  "5. export to csv\n",
+                  "5. Import or export data\n",
                   "6. quit")
-            choice = input("Enter the number of the action you want to do:\n\n")
+            choice = input("Enter the number of the action" +
+                           "you want to do:\n\n")
 
             if choice == '1':
                 self.update_data()
@@ -45,14 +46,23 @@ class Main():
                 df = DataFetch()
                 print(df.print_content_all())
             elif choice == '3':
-                print("Search by using the persons name:\n")
+                print("Search for a person in the database using their full",
+                      " name(if you can't remember parts of the name will",
+                      "also work):\n")
                 name = input()
                 df = DataFetch()
                 df.search_data(name)
             elif choice == '4':
                 self.edit_data()
             elif choice == '5':
-                self.export_data()
+                print("What do you want to do?\n",
+                      "1. Export data?\n",
+                      "2. Import data?\n")
+                answ = input()
+                if answ == "1":
+                    self.export_data()
+                elif answ == "2":
+                    self.import_data()
             elif choice == '6':
                 sys.exit()
             else:
@@ -73,6 +83,12 @@ class Main():
     def export_data(self):
         de = DataExport()
         de.export_csv()
+        print("Success!")
+
+    def import_data(self):
+        di = DataImport()
+        file_name = input("What is the filename?\n\t")
+        di.import_csv(file_name)
         print("Success!")
 
     def edit_data(self):
@@ -198,7 +214,8 @@ class Main():
             print(self.help_text())
         # is true if the -dd arguemnt was added
         if willAdd:
-             # if both the -dd and -pa was supplied - add and print, not allowed
+            # if both the -dd and -pa was supplied -
+            # add and print, not allowed
             if will_print:
                 print(self.help_text())
                 sys.exit()

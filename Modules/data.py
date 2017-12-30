@@ -1,7 +1,7 @@
 import sqlite3
 import json
 import csv
-import sys
+# import sys
 conn = sqlite3.connect('addressBook.db')
 c = conn.cursor()
 
@@ -15,8 +15,9 @@ class DataFetch():
 
     def search_data(self, name):
         t = ('%'+name+'%', )
-        c.execute('SELECT * FROM book WHERE name LIKE ?', t)
-        print(c.fetchone())
+        content = c.execute('SELECT * FROM book WHERE name LIKE ?',
+                            t).fetchall()
+        print(json.dumps(content, sort_keys=True, indent=4))
 
     def print_content_all(self, json_str=False):
         content = c.execute('SELECT * FROM book').fetchall()
@@ -24,7 +25,7 @@ class DataFetch():
         if json_str:
             return json.dumps([dict(ix) for ix in content])
 
-        return(content)
+        return(json.dumps(content, sort_keys=True, indent=4))
 
 
 class DataAdd():
@@ -42,9 +43,9 @@ class DataEdit():
                   name =?,
                   phoneNumber =?,
                   address =?,
-                  email =?
-                  WHERE name =?
-                  ''', (name, phoneNumber, address, email, cname))
+                  email =?,
+                  WHERE name =?''',
+                  (name, phoneNumber, address, email, cname))
         conn.commit()
 
     def update_database_name(self, cname, name):
@@ -74,7 +75,6 @@ class DataEdit():
 class DataExport():
     # This class will contain multiple functions for exporting data
     def export_csv(self):
-
         c.execute("SELECT * FROM book")
         content = c.fetchall()
         with open('data.csv', 'a') as out:
@@ -83,5 +83,16 @@ class DataExport():
 
 
 class DataImport():
-    def import_csv(self):
-        pass
+    # This call will ontain multiple function for importing data for different,
+    # file formats and into the SQLite3 database
+    def import_csv(self, file_name):
+        with open(file_name, 'r+') as fin:
+            dr = csv.DictReader(fin)  # comma is default delimiter
+            to_db = [(i['Name'],
+                      i['Number'],
+                      i['Address'],
+                      i['Email']) for i in dr]
+
+        c.executemany("""INSERT INTO book (name, phoneNumber, address, email)
+                      VALUES (?, ?, ?, ?);""", to_db)
+        conn.commit()
