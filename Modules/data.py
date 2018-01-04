@@ -81,6 +81,13 @@ class DataExport():
             writer = csv.writer(out, lineterminator='\n')
             writer.writerows(content)
 
+    def export_txt(self):
+        c.execute("SELECT * FROM book")
+        content = c.fetchall()
+        with open('data.txt', 'a') as out:
+            writer = out.writer(out, lineterminator='\n')
+            writer.writerows(content)
+
 
 class DataImport():
     # This call will ontain multiple function for importing data for different,

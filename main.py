@@ -11,7 +11,7 @@
 # edits: Xenchrarr
 #
 
-
+import time
 import getopt
 import sys
 from Modules.data import DataFetch, DataAdd, DataEdit, DataExport, DataImport
@@ -82,8 +82,18 @@ class Main():
 
     def export_data(self):
         de = DataExport()
-        de.export_csv()
-        print("Success!")
+        print("Welcome to the section used to export data!\n",
+              "What format would you like to export your table into?\n",
+              "Valid formats are: CSV, txt, xlxs")
+        answ = input()
+        if answ == "CSV" or "csv":
+            startTime = time.time()
+            de.export_csv()
+            print("The export was succseful and it took:",
+                  (time.time() - startTime), "s")
+        elif answ == "TXT" or "txt:":
+            de.export_txt()
+            print("Success!")
 
     def import_data(self):
         di = DataImport()
@@ -146,16 +156,14 @@ class Main():
 
     # Help text to be printed if arguments are mismatching
     def help_text(self):
-        return '''
-            -h -help for help
-            -add to add, need be followed by
-                -n and a name
-                -p and a phone number
-                -e and an email
-                -a and an address
-            -pa to print all
-            -s and an search phrase (name atm)
-        '''
+        return """  -h -help for help
+                    -add to add, need be followed by
+                        -n and a name
+                        -p and a phone number
+                        -e and an email
+                        -a and an address
+                    -pa to print all
+                    -s and an search phrase (name atm)"""
 
     # Main function. It loops through the arguments and see if they match
     # If they match - the data is saved, and some action is taken.
