@@ -37,7 +37,7 @@ class Main():
                   "4. edit\n",
                   "5. Import or export data\n",
                   "6. quit")
-            choice = input("Enter the number of the action" +
+            choice = input("Enter the number of the action " +
                            "you want to do:\n\n")
 
             if choice == '1':
@@ -86,14 +86,16 @@ class Main():
               "What format would you like to export your table into?\n",
               "Valid formats are: CSV, txt, xlxs")
         answ = input()
-        if answ == "CSV" or "csv":
+        if answ in {"CSV", "csv"}:
             startTime = time.time()
             de.export_csv()
             print("The export was succseful and it took:",
                   (time.time() - startTime), "s")
-        elif answ == "TXT" or "txt:":
+        elif answ in {"TXT", "txt"}:
             de.export_txt()
             print("Success!")
+        else:
+            print("Not a valid format")
 
     def import_data(self):
         di = DataImport()
