@@ -84,9 +84,9 @@ class DataExport():
     def export_txt(self):
         c.execute("SELECT * FROM book")
         content = c.fetchall()
-        with open('data.txt', 'a') as out:
-            writer = out.writer(out, lineterminator='\n')
-            writer.writerows(content)
+        f = open('data.txt', 'w')
+        for i in content:
+            f.write("\n".join(i))
 
 
 class DataImport():
