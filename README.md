@@ -47,6 +47,16 @@ def import_csv(self, file_name):
                     VALUES (?, ?, ?, ?);""", to_db)
     conn.commit()
 ```
+
+## Excel
+If you want to open the csv-file in excel properly you have to do the following:
+
+1. Open excel
+2. Go to the tab called DATA
+3. Click the button "From Text/CSV"
+4. Select the file
+5. Select the Delimiter as comma, and press load
+
 ## Branches
 The branches are as following:
 * Master(Stable)
